@@ -1,348 +1,368 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5">
-  <title>🌿 eco · user‑friendly shop</title>
-  <!-- Font & icon library (Font Awesome) for clean UI -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>🌱 Plantish · plant‑based market</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
   <style>
+    /* ── reset & base ── */
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
     }
 
     body {
-      background: #f6f9fc;
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      background: linear-gradient(145deg, #f0f9f4 0%, #e6f2ec 100%);
       min-height: 100vh;
       display: flex;
-      flex-direction: column;
       align-items: center;
       justify-content: center;
       padding: 2rem 1rem;
     }
 
-    /* main card – soft, elevated, friendly */
-    .shop-container {
-      max-width: 1300px;
+    /* ── main card – organic, fresh, playful ── */
+    .plant-shop {
+      max-width: 1280px;
       width: 100%;
-      background: #ffffff;
-      border-radius: 2.5rem;
-      box-shadow: 0 20px 40px -12px rgba(0, 20, 30, 0.15), 0 8px 24px -6px rgba(0, 0, 0, 0.05);
-      padding: 2.5rem 2rem;
-      transition: all 0.2s ease;
+      background: rgba(255, 255, 255, 0.70);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-radius: 3.5rem;
+      padding: 2.5rem 2.2rem;
+      box-shadow: 0 30px 60px -20px rgba(30, 60, 40, 0.25),
+                  0 10px 30px -10px rgba(0, 20, 10, 0.08);
+      border: 1px solid rgba(180, 210, 190, 0.25);
+      transition: 0.3s;
     }
 
-    /* header with warm greeting */
-    .shop-header {
+    /* ── header – vibrant & friendly ── */
+    .header-row {
       display: flex;
       flex-wrap: wrap;
       align-items: center;
       justify-content: space-between;
-      margin-bottom: 2.5rem;
-      gap: 1rem 0.5rem;
+      margin-bottom: 2.8rem;
+      gap: 0.8rem 1.5rem;
     }
 
-    .shop-header h1 {
-      font-size: 2rem;
-      font-weight: 600;
-      letter-spacing: -0.02em;
-      color: #1a2e3f;
+    .brand {
       display: flex;
       align-items: center;
-      gap: 0.6rem;
+      gap: 0.75rem;
     }
 
-    .shop-header h1 i {
-      color: #2f8f6d;
-      font-size: 2rem;
-    }
-
-    .cart-summary {
-      background: #eaf4ee;
-      padding: 0.6rem 1.4rem 0.6rem 1.2rem;
+    .brand i {
+      font-size: 2.6rem;
+      color: #2b7a4b;
+      background: #ddf0e4;
+      padding: 0.4rem;
       border-radius: 60px;
+      box-shadow: 0 4px 8px rgba(30, 80, 50, 0.06);
+    }
+
+    .brand h1 {
+      font-size: 2.2rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: #1d3a2a;
+    }
+
+    .brand span {
+      font-weight: 300;
+      color: #3e6d53;
+      margin-left: 0.2rem;
+    }
+
+    .cart-pill {
+      background: #d8eee2;
+      padding: 0.5rem 1.6rem 0.5rem 1.4rem;
+      border-radius: 80px;
       display: flex;
       align-items: center;
-      gap: 0.8rem;
-      font-weight: 500;
-      color: #1a3a2b;
-      box-shadow: inset 0 1px 3px rgba(0,0,0,0.03);
+      gap: 0.9rem;
+      font-weight: 600;
+      color: #14442b;
+      border: 1px solid rgba(80, 140, 110, 0.15);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.02);
       transition: 0.2s;
     }
 
-    .cart-summary i {
+    .cart-pill i {
       font-size: 1.3rem;
-      color: #1f6e4a;
+      color: #1d6a41;
     }
 
-    .cart-count {
-      background: #1f6e4a;
+    .cart-badge {
+      background: #1e6a3e;
       color: white;
       border-radius: 40px;
-      padding: 0.1rem 0.7rem;
-      font-size: 0.9rem;
+      padding: 0.05rem 0.8rem;
+      font-size: 1rem;
       font-weight: 600;
-      min-width: 1.8rem;
+      min-width: 2rem;
       text-align: center;
     }
 
-    /* product grid – flexible, responsive, airy */
-    .product-grid {
+    /* ── grid – plants with personality ── */
+    .plant-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 2rem 1.5rem;
-      margin: 1.2rem 0 0.8rem;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 2rem 1.6rem;
+      margin: 1.5rem 0 1.8rem;
     }
 
-    /* each product card – clean, friendly, with hover lift */
-    .product-card {
-      background: #ffffff;
-      border-radius: 1.8rem;
-      padding: 1.5rem 1rem 1.4rem;
-      box-shadow: 0 4px 12px rgba(0, 20, 30, 0.04);
-      border: 1px solid rgba(210, 225, 235, 0.4);
-      transition: all 0.25s ease;
+    /* ── plant card – charming, earthy, interactive ── */
+    .plant-card {
+      background: rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      border-radius: 2.2rem;
+      padding: 1.8rem 0.8rem 1.6rem;
+      border: 1px solid rgba(160, 200, 175, 0.25);
+      box-shadow: 0 6px 18px rgba(40, 80, 60, 0.04);
+      transition: all 0.3s cubic-bezier(0.15, 0.75, 0.4, 1);
       display: flex;
       flex-direction: column;
       align-items: center;
       text-align: center;
-      backdrop-filter: blur(2px);
+      cursor: default;
+      position: relative;
     }
 
-    .product-card:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 16px 30px -10px rgba(30, 60, 70, 0.12);
-      border-color: #bcd9d0;
-      background: #fcfefd;
+    .plant-card:hover {
+      transform: translateY(-10px) scale(1.01);
+      background: rgba(255, 255, 255, 0.92);
+      border-color: #8dc0a6;
+      box-shadow: 0 24px 40px -16px rgba(30, 80, 50, 0.18);
     }
 
-    /* image placeholder – friendly icons */
-    .product-image {
-      font-size: 3.6rem;
+    /* emoji / icon circle */
+    .plant-icon {
+      font-size: 4rem;
       line-height: 1;
       margin-bottom: 0.6rem;
-      background: #eef5f2;
-      width: 90px;
-      height: 90px;
+      background: #e3f3ea;
+      width: 100px;
+      height: 100px;
       display: flex;
       align-items: center;
       justify-content: center;
-      border-radius: 60px;
-      color: #1d6b4a;
-      transition: 0.2s;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+      border-radius: 50%;
+      box-shadow: inset 0 -4px 0 rgba(0,0,0,0.02), 0 8px 18px rgba(40, 100, 70, 0.06);
+      transition: 0.3s;
     }
 
-    .product-card:hover .product-image {
-      background: #ddebe4;
-      transform: scale(1.02);
+    .plant-card:hover .plant-icon {
+      background: #d2ecdd;
+      transform: rotate(4deg) scale(1.04);
     }
 
-    .product-name {
-      font-size: 1.2rem;
-      font-weight: 600;
-      color: #1a2e3b;
-      margin: 0.4rem 0 0.2rem;
-      letter-spacing: -0.01em;
-    }
-
-    .product-price {
+    .plant-name {
       font-size: 1.3rem;
-      font-weight: 600;
-      color: #1f5e44;
-      margin: 0.15rem 0 0.8rem;
-      background: #f0f7f2;
-      padding: 0.1rem 1rem;
-      border-radius: 40px;
-      display: inline-block;
+      font-weight: 700;
+      color: #173b27;
+      margin: 0.3rem 0 0.1rem;
+      letter-spacing: -0.01em;
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+      flex-wrap: wrap;
+      justify-content: center;
     }
 
-    .product-description {
-      font-size: 0.9rem;
-      color: #4b5e69;
+    .qty-badge {
+      font-size: 0.7rem;
+      background: #b8dac8;
+      padding: 0.1rem 0.6rem;
+      border-radius: 30px;
+      font-weight: 600;
+      color: #0c3922;
+    }
+
+    .plant-price {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: #1a5838;
+      background: #dff0e6;
+      padding: 0.1rem 1.2rem;
+      border-radius: 60px;
+      margin: 0.2rem 0 0.5rem;
+      display: inline-block;
+      letter-spacing: 0.3px;
+    }
+
+    .plant-desc {
+      font-size: 0.88rem;
+      color: #3f5f4e;
       line-height: 1.4;
-      margin-bottom: 1rem;
-      padding: 0 0.2rem;
+      padding: 0 0.4rem;
       min-height: 2.8rem;
       font-weight: 400;
+      margin-bottom: 0.6rem;
     }
 
+    /* ── add button – juicy & inviting ── */
     .add-btn {
-      background: #1a3a2b;
+      background: #1c4f33;
       border: none;
       color: white;
-      font-weight: 500;
+      font-weight: 600;
       font-size: 1rem;
-      padding: 0.6rem 1.8rem;
-      border-radius: 60px;
+      padding: 0.65rem 2rem;
+      border-radius: 80px;
       cursor: pointer;
       display: inline-flex;
       align-items: center;
-      gap: 0.6rem;
+      gap: 0.7rem;
       transition: all 0.2s ease;
-      box-shadow: 0 4px 8px rgba(20, 60, 40, 0.08);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      letter-spacing: 0.3px;
+      box-shadow: 0 6px 14px rgba(30, 80, 50, 0.15);
+      border: 1px solid rgba(255,255,255,0.1);
       margin-top: 0.2rem;
+      letter-spacing: 0.3px;
     }
 
     .add-btn i {
-      font-size: 0.95rem;
-      transition: transform 0.2s;
+      font-size: 1rem;
+      transition: transform 0.25s;
     }
 
     .add-btn:hover {
-      background: #0f2d1f;
-      transform: scale(1.02);
-      box-shadow: 0 8px 16px rgba(26, 58, 43, 0.2);
+      background: #0f3a24;
+      transform: scale(1.04) translateY(-2px);
+      box-shadow: 0 12px 24px rgba(20, 70, 40, 0.2);
     }
 
     .add-btn:active {
-      transform: scale(0.96);
+      transform: scale(0.94);
     }
 
     .add-btn:focus-visible {
-      outline: 3px solid #7bb79b;
-      outline-offset: 2px;
+      outline: 3px solid #7bc09b;
+      outline-offset: 3px;
     }
 
-    /* feedback message – subtle & friendly */
-    .feedback-area {
-      margin-top: 2.5rem;
+    /* ── footer – feedback & reset ── */
+    .action-bar {
+      margin-top: 2.8rem;
       display: flex;
+      flex-wrap: wrap;
       align-items: center;
       justify-content: center;
-      flex-wrap: wrap;
-      gap: 0.8rem 2rem;
-      border-top: 1px solid rgba(180, 200, 195, 0.3);
+      gap: 1rem 2.5rem;
       padding-top: 2rem;
+      border-top: 2px dashed rgba(100, 160, 130, 0.2);
     }
 
-    .feedback-message {
-      background: #ecf7f1;
-      padding: 0.5rem 1.8rem;
-      border-radius: 60px;
-      font-size: 0.95rem;
-      color: #1a452e;
+    .feedback-bubble {
+      background: #d9efe2;
+      padding: 0.6rem 2rem;
+      border-radius: 80px;
+      font-size: 1rem;
+      color: #16432b;
       display: flex;
       align-items: center;
-      gap: 0.7rem;
-      box-shadow: 0 1px 4px rgba(0,0,0,0.02);
+      gap: 0.8rem;
       font-weight: 450;
-      transition: 0.2s;
-      min-height: 3rem;
+      box-shadow: inset 0 1px 4px rgba(0,0,0,0.02);
+      min-height: 3.2rem;
+      backdrop-filter: blur(4px);
     }
 
-    .feedback-message i {
-      color: #2b7a57;
-      font-size: 1.1rem;
+    .feedback-bubble i {
+      font-size: 1.2rem;
+      color: #1b7547;
     }
 
-    .reset-cart-btn {
+    .reset-btn {
       background: transparent;
-      border: 1px solid #c7d9d2;
-      padding: 0.4rem 1.5rem;
-      border-radius: 60px;
-      color: #2b4d3d;
-      font-weight: 450;
+      border: 1.5px solid #b2d2c0;
+      padding: 0.45rem 1.8rem;
+      border-radius: 80px;
+      color: #1f4d34;
+      font-weight: 500;
       font-size: 0.95rem;
       cursor: pointer;
       transition: 0.2s;
       display: inline-flex;
       align-items: center;
-      gap: 0.5rem;
-      background: #f6fbf9;
+      gap: 0.6rem;
+      background: rgba(255,255,255,0.3);
+      backdrop-filter: blur(4px);
     }
 
-    .reset-cart-btn:hover {
-      background: #e2ede7;
-      border-color: #9cb9ab;
-      color: #0e2d1e;
+    .reset-btn:hover {
+      background: #d2ecdd;
+      border-color: #6ea889;
+      color: #0b311e;
+      transform: scale(1.02);
     }
 
-    .reset-cart-btn i {
-      font-size: 0.9rem;
-    }
-
-    /* empty state / cart info */
-    .empty-cart-message {
-      color: #5b7570;
-      font-weight: 400;
-      font-size: 0.95rem;
-    }
-
-    /* responsive fine-tune */
-    @media (max-width: 600px) {
-      .shop-container {
-        padding: 1.5rem 1rem;
-        border-radius: 1.8rem;
+    /* ── responsive ── */
+    @media (max-width: 640px) {
+      .plant-shop {
+        padding: 1.6rem 1rem;
+        border-radius: 2.5rem;
       }
-      .shop-header {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 0.6rem;
-      }
-      .shop-header h1 {
+      .brand h1 {
         font-size: 1.7rem;
       }
-      .product-grid {
-        gap: 1.2rem;
+      .plant-grid {
+        gap: 1.4rem;
       }
-      .feedback-area {
+      .action-bar {
         flex-direction: column;
         align-items: stretch;
       }
+      .feedback-bubble {
+        justify-content: center;
+      }
     }
 
-    /* utility to hide/show */
-    .hidden {
-      display: none !important;
-    }
+    /* tiny helper */
+    .hidden { display: none !important; }
 
-    /* cart count animation */
-    .cart-count.pop {
-      animation: pop 0.2s ease-in-out;
+    /* cart badge pulse */
+    .cart-badge.pop {
+      animation: pop 0.25s ease;
     }
     @keyframes pop {
-      0% { transform: scale(0.8); }
-      80% { transform: scale(1.2); }
+      0% { transform: scale(0.7); }
+      70% { transform: scale(1.25); }
       100% { transform: scale(1); }
     }
   </style>
 </head>
 <body>
 
-<div class="shop-container" role="main">
+<div class="plant-shop" role="main">
 
-  <!-- header with cart summary -->
-  <div class="shop-header">
-    <h1>
-      <i class="fas fa-leaf" aria-hidden="true"></i> 
-      green&nbsp;market
-    </h1>
-    <div class="cart-summary" aria-label="Cart summary">
-      <i class="fas fa-shopping-bag" aria-hidden="true"></i>
+  <!-- header -->
+  <div class="header-row">
+    <div class="brand">
+      <i class="fas fa-seedling" aria-hidden="true"></i>
+      <h1>plantish<span>·market</span></h1>
+    </div>
+    <div class="cart-pill">
+      <i class="fas fa-shopping-basket" aria-hidden="true"></i>
       <span>cart</span>
-      <span class="cart-count" id="cartCount">0</span>
+      <span class="cart-badge" id="cartCount">0</span>
     </div>
   </div>
 
-  <!-- product grid -->
-  <div class="product-grid" id="productGrid">
-    <!-- each product card will be injected via JS -->
-  </div>
+  <!-- plant grid -->
+  <div class="plant-grid" id="plantGrid"></div>
 
-  <!-- feedback & actions -->
-  <div class="feedback-area">
-    <div class="feedback-message" id="feedbackMessage">
-      <i class="fas fa-check-circle" aria-hidden="true"></i>
-      <span id="feedbackText">✨ add your favorite items</span>
+  <!-- feedback + reset -->
+  <div class="action-bar">
+    <div class="feedback-bubble" id="feedbackBubble">
+      <i class="fas fa-spa" aria-hidden="true"></i>
+      <span id="feedbackText">🌿 ready to grow your cart?</span>
     </div>
-    <button class="reset-cart-btn" id="resetCartBtn" aria-label="Reset cart">
-      <i class="fas fa-undo-alt" aria-hidden="true"></i> reset cart
+    <button class="reset-btn" id="resetCartBtn">
+      <i class="fas fa-rotate-left" aria-hidden="true"></i> reset
     </button>
   </div>
 </div>
@@ -351,187 +371,139 @@
   (function() {
     "use strict";
 
-    // ----- friendly product data (eco / user‑friendly vibes) -----
-    const products = [
-      { 
-        id: 1, 
-        name: 'Bamboo Mug', 
-        price: 18.90, 
-        description: 'Eco‑friendly, lightweight, & dishwasher safe.',
-        icon: 'fa-mug-saucer'
-      },
-      { 
-        id: 2, 
-        name: 'Organic Cotton Tee', 
-        price: 29.00, 
-        description: 'Soft, fair‑trade, unisex fit. 100% organic.',
-        icon: 'fa-shirt'
-      },
-      { 
-        id: 3, 
-        name: 'Reusable Tote', 
-        price: 14.50, 
-        description: 'Sturdy canvas, folds into pocket. Plastic‑free.',
-        icon: 'fa-bag-shopping'
-      },
-      { 
-        id: 4, 
-        name: 'Beeswax Wraps', 
-        price: 22.30, 
-        description: 'Set of 3, washable, plastic‑free food storage.',
-        icon: 'fa-seedling'
-      },
-      { 
-        id: 5, 
-        name: 'Cork Notebook', 
-        price: 12.80, 
-        description: 'Sustainably sourced cork cover, recycled paper.',
-        icon: 'fa-book'
-      },
-      { 
-        id: 6, 
-        name: 'Bamboo Utensil Set', 
-        price: 16.20, 
-        description: 'Fork, knife, spoon + straw in travel pouch.',
-        icon: 'fa-utensils'
-      }
+    // ── plant catalog – emoji + friendly names ──
+    const plants = [
+      { id: 1, name: 'Aloe Vera', price: 12.90, desc: 'Soothing gel, easy care, air purifier.', emoji: '🌿' },
+      { id: 2, name: 'Monstera', price: 24.50, desc: 'Iconic split leaves, tropical vibes.', emoji: '🪴' },
+      { id: 3, name: 'Snake Plant', price: 18.20, desc: 'Nearly indestructible, perfect for beginners.', emoji: '🐍' },
+      { id: 4, name: 'Pothos', price: 14.00, desc: 'Trailing beauty, thrives in low light.', emoji: '🌱' },
+      { id: 5, name: 'Fiddle Leaf', price: 34.90, desc: 'Dramatic large leaves, statement piece.', emoji: '🎻' },
+      { id: 6, name: 'String of Pearls', price: 19.80, desc: 'Delicate trailing beads, whimsical.', emoji: '📿' }
     ];
 
-    // ----- state -----
-    let cart = [];                 // store product objects (with quantity)
+    // ── state ──
+    let cart = [];
     const cartCountEl = document.getElementById('cartCount');
     const feedbackTextEl = document.getElementById('feedbackText');
-    const feedbackIcon = document.querySelector('#feedbackMessage i');
-    const productGrid = document.getElementById('productGrid');
+    const feedbackIcon = document.querySelector('#feedbackBubble i');
+    const plantGrid = document.getElementById('plantGrid');
     const resetBtn = document.getElementById('resetCartBtn');
 
-    // ----- helper: update cart count & feedback -----
+    // ── helpers ──
     function updateUI() {
-      const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
-      cartCountEl.textContent = totalItems;
+      const total = cart.reduce((sum, item) => sum + item.quantity, 0);
+      cartCountEl.textContent = total;
 
-      // animate count (just a small touch)
+      // pop animation
       cartCountEl.classList.remove('pop');
-      // force reflow for replay
       void cartCountEl.offsetWidth;
       cartCountEl.classList.add('pop');
 
-      // update feedback message (user‑friendly)
-      if (totalItems === 0) {
-        feedbackTextEl.textContent = '✨ your cart is empty – pick something nice!';
-        feedbackIcon.className = 'fas fa-hand-peace';
-      } else if (totalItems === 1) {
-        const itemName = cart[0].name;
-        feedbackTextEl.textContent = `🛒 ${itemName} in your cart – great choice!`;
-        feedbackIcon.className = 'fas fa-check-circle';
+      // feedback with personality
+      if (total === 0) {
+        feedbackTextEl.textContent = '🌿 ready to grow your cart?';
+        feedbackIcon.className = 'fas fa-spa';
+      } else if (total === 1) {
+        const name = cart[0].name;
+        feedbackTextEl.textContent = `🌱 ${name} – great pick!`;
+        feedbackIcon.className = 'fas fa-leaf';
       } else {
-        // show first item + total count
         const first = cart[0].name;
-        const extra = totalItems - 1;
-        feedbackTextEl.textContent = `🛍️ ${first} + ${extra} more item${extra > 1 ? 's' : ''} in cart`;
-        feedbackIcon.className = 'fas fa-check-circle';
+        const rest = total - 1;
+        feedbackTextEl.textContent = `🌳 ${first} + ${rest} more plant${rest > 1 ? 's' : ''} in your basket`;
+        feedbackIcon.className = 'fas fa-seedling';
       }
 
-      // re-render product cards to reflect "in cart" state (optional but nice)
-      renderProducts();
+      renderPlants();
     }
 
-    // ----- add to cart -----
-    function addToCart(productId) {
-      const product = products.find(p => p.id === productId);
-      if (!product) return;
+    // ── add to cart ──
+    function addPlant(plantId) {
+      const plant = plants.find(p => p.id === plantId);
+      if (!plant) return;
 
-      const existing = cart.find(item => item.id === productId);
+      const existing = cart.find(item => item.id === plantId);
       if (existing) {
         existing.quantity += 1;
       } else {
-        cart.push({ ...product, quantity: 1 });
+        cart.push({ ...plant, quantity: 1 });
       }
+
       updateUI();
 
-      // subtle feedback: flash product card (optional)
-      const card = document.querySelector(`.product-card[data-id="${productId}"]`);
+      // flash card feedback
+      const card = document.querySelector(`.plant-card[data-id="${plantId}"]`);
       if (card) {
-        card.style.transition = 'background 0.15s';
-        card.style.background = '#e3f2ec';
-        setTimeout(() => { card.style.background = ''; }, 300);
+        card.style.transition = 'background 0.2s';
+        card.style.background = '#d4eee1';
+        setTimeout(() => { card.style.background = ''; }, 350);
       }
     }
 
-    // ----- reset cart -----
+    // ── reset ──
     function resetCart() {
       cart = [];
       updateUI();
-      // extra feedback
-      feedbackTextEl.textContent = '🧹 cart cleared – start fresh!';
-      feedbackIcon.className = 'fas fa-leaf';
+      feedbackTextEl.textContent = '🧹 cart cleared – time for new greens!';
+      feedbackIcon.className = 'fas fa-seedling';
       setTimeout(() => {
-        // bring back normal message after 2s, but only if cart still empty
         if (cart.length === 0) {
-          feedbackTextEl.textContent = '✨ add your favorite items';
-          feedbackIcon.className = 'fas fa-check-circle';
+          feedbackTextEl.textContent = '🌿 ready to grow your cart?';
+          feedbackIcon.className = 'fas fa-spa';
         }
-      }, 2000);
+      }, 2200);
     }
 
-    // ----- render product cards (from products array) -----
-    function renderProducts() {
-      // clear grid
-      productGrid.innerHTML = '';
+    // ── render plant cards ──
+    function renderPlants() {
+      plantGrid.innerHTML = '';
 
-      products.forEach(product => {
-        // check if product is in cart (for optional badge, we show quantity)
-        const cartItem = cart.find(item => item.id === product.id);
-        const inCartQty = cartItem ? cartItem.quantity : 0;
+      plants.forEach(plant => {
+        const cartItem = cart.find(item => item.id === plant.id);
+        const qty = cartItem ? cartItem.quantity : 0;
 
-        // build card
         const card = document.createElement('div');
-        card.className = 'product-card';
-        card.setAttribute('data-id', product.id);
+        card.className = 'plant-card';
+        card.setAttribute('data-id', plant.id);
 
-        // icon (font awesome)
-        const iconHtml = `<i class="fas ${product.icon}" aria-hidden="true"></i>`;
-
-        // description with possible "in cart" indicator
-        let qtyIndicator = '';
-        if (inCartQty > 0) {
-          qtyIndicator = `<span style="font-size:0.75rem; background:#e3f0e9; padding:0.1rem 0.7rem; border-radius:40px; margin-left:0.3rem; color:#1a4d33; font-weight:500;">×${inCartQty}</span>`;
+        let qtyBadge = '';
+        if (qty > 0) {
+          qtyBadge = `<span class="qty-badge">×${qty}</span>`;
         }
 
         card.innerHTML = `
-          <div class="product-image">${iconHtml}</div>
-          <div class="product-name">${product.name} ${qtyIndicator}</div>
-          <div class="product-price">€${product.price.toFixed(2)}</div>
-          <div class="product-description">${product.description}</div>
-          <button class="add-btn" data-id="${product.id}" aria-label="Add ${product.name} to cart">
+          <div class="plant-icon">${plant.emoji}</div>
+          <div class="plant-name">
+            ${plant.name} ${qtyBadge}
+          </div>
+          <div class="plant-price">€${plant.price.toFixed(2)}</div>
+          <div class="plant-desc">${plant.desc}</div>
+          <button class="add-btn" data-id="${plant.id}" aria-label="Add ${plant.name}">
             <i class="fas fa-plus-circle" aria-hidden="true"></i> add
           </button>
         `;
 
-        productGrid.appendChild(card);
+        plantGrid.appendChild(card);
 
-        // attach event listener to the button (delegation would also work)
         const btn = card.querySelector('.add-btn');
         btn.addEventListener('click', function(e) {
           e.stopPropagation();
           const id = parseInt(this.getAttribute('data-id'), 10);
-          addToCart(id);
+          addPlant(id);
         });
       });
     }
 
-    // ----- reset button event -----
+    // ── event listeners ──
     resetBtn.addEventListener('click', resetCart);
 
-    // ----- initial render & UI -----
-    renderProducts();
+    // ── init ──
+    renderPlants();
     updateUI();
 
-    // (optional) demo: pre-fill cart with one item for friendliness? 
-    // but we want it empty so user starts fresh. (we keep empty)
+    // optional: pre‑fill with one item for demo? 
+    // we leave empty for clean start.
 
-    // keyboard / accessibility: product cards can be focused
-    // the add button is already focusable.
   })();
 </script>
 </body>
